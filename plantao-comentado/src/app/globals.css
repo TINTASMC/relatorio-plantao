@@ -1,0 +1,110 @@
+/*
+  globals.css — Estilos globais do sistema
+  
+  Aqui ficam as variáveis de cor, estilos base e animações
+  que são usados em toda a aplicação.
+  
+  As variáveis CSS (--bg, --text, etc.) permitem trocar
+  o tema do sistema mudando apenas aqui, sem tocar nos componentes.
+*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+/* Variáveis de cor — o "vocabulário de cores" do sistema */
+:root {
+  --bg: #0c0d14;           /* fundo da página */
+  --surface: #12131e;      /* fundo dos cards */
+  --surface2: #181927;     /* fundo de cards secundários */
+  --surface3: #1e2033;     /* fundo de inputs e áreas escuras */
+  --border: #252840;       /* borda sutil */
+  --border2: #2e324f;      /* borda um pouco mais visível */
+  --accent: #6366f1;       /* roxo principal (botões, destaques) */
+  --accent2: #818cf8;      /* roxo médio */
+  --accent3: #a5b4fc;      /* roxo claro (textos em destaque) */
+  --text: #e2e4f0;         /* texto principal */
+  --text2: #a8adc4;        /* texto secundário */
+  --muted: #636888;        /* texto apagado */
+  --muted2: #424660;       /* texto bem apagado */
+  --green: #34d399;        /* verde (Normal) */
+  --green-bg: rgba(52,211,153,0.10);
+  --green-bd: rgba(52,211,153,0.22);
+  --yellow: #fbbf24;       /* amarelo (Alerta) */
+  --yellow-bg: rgba(251,191,36,0.10);
+  --yellow-bd: rgba(251,191,36,0.22);
+  --red: #f87171;          /* vermelho (Crítico) */
+  --red-bg: rgba(248,113,113,0.10);
+  --red-bd: rgba(248,113,113,0.22);
+}
+
+/* Estilo base do corpo da página */
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased; /* deixa o texto mais nítido */
+}
+
+/* Estilo base de todos os campos de formulário */
+input, textarea, select {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1.5px solid var(--border2);
+  border-radius: 10px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  width: 100%;
+  outline: none;
+}
+/* Quando o campo está em foco (clicado), fica roxo */
+input:focus, textarea:focus, select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.15);
+}
+input::placeholder, textarea::placeholder { color: var(--muted2); }
+select option { background: var(--surface2); }
+
+/* Barra de rolagem personalizada */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--surface); }
+::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* Animação de entrada suave (elementos que aparecem de baixo para cima) */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fade-up { animation: fadeUp 0.28s ease forwards; }
+
+/* Animação de aparecimento simples (sem movimento) */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.fade-in { animation: fadeIn 0.2s ease forwards; }
+
+/*
+  Estilos de impressão — aplicados quando o usuário manda imprimir
+  Transforma o fundo escuro em branco e esconde elementos desnecessários
+*/
+@media print {
+  :root {
+    --bg: #fff; --surface: #fff; --surface2: #f8f9fa; --surface3: #f1f3f5;
+    --border: #dee2e6; --border2: #ced4da;
+    --text: #212529; --text2: #495057; --muted: #6c757d; --muted2: #adb5bd;
+    --accent: #4f46e5; --accent2: #6366f1; --accent3: #818cf8;
+    --green: #059669; --green-bg: #d1fae5; --green-bd: #a7f3d0;
+    --yellow: #d97706; --yellow-bg: #fef3c7; --yellow-bd: #fde68a;
+    --red: #dc2626; --red-bg: #fee2e2; --red-bd: #fecaca;
+  }
+  body { background: #fff !important; color: #212529 !important; }
+  .no-print { display: none !important; }  /* esconde botões na impressão */
+  .print-break { page-break-before: always; }
+  header { display: none !important; }    /* esconde o menu na impressão */
+  .card { border: 1px solid #dee2e6 !important; page-break-inside: avoid; }
+  @page { margin: 1.5cm; }
+}
