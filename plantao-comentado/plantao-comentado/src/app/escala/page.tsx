@@ -21,11 +21,11 @@ const MONTHS = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','A
 // Ordem de quem faz plantão no sábado
 // 1º sábado do mês = Higor, 2º = Danilo, 3º = Adriano, 4º = Carlos
 // Se tiver 5º sábado, o % 4 faz voltar ao início (Higor)
-const PLANTAO_ORDEM = ['Higor','Danilo','Adriano','Carlos'];
+const PLANTAO_ORDEM = ['Danilo','Adriano','Carlos'];
 
 // Mapeamento de nome para apelido de cor
 // Usado para buscar a cor certa no TAG_COLORS
-const COR: Record<string, string> = { Higor:'higor', Adriano:'adriano', Carlos:'carlos', Danilo:'danilo' };
+const COR: Record<string, string> = {Adriano:'adriano', Carlos:'carlos', Danilo:'danilo' };
 
 // Lista de meses que a escala cobre: abril (3) a dezembro (11) de 2026
 // Em JavaScript: janeiro=0, fevereiro=1, março=2, abril=3...
